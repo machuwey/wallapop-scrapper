@@ -25,6 +25,7 @@ app.listen(3000, '127.0.0.1')
 //The same function but using axios instead of http
  setInterval(function () {
     termSearch.replace(/ /g, '+')
+   //TODO make the API call dynamic to a value we can provide
    axios.get(
         'https://api.wallapop.com/api/v3/general/search?user_province=M%C3%A1laga&keywords=' +
         termSearch +
@@ -35,22 +36,20 @@ app.listen(3000, '127.0.0.1')
             //save the old result   
             result_old = result
             result = response.data
-
-            //If the result is different from the previous result
-            //then send and email of alert to the user matvetron@gmail.com
-          
-            //also save in a file
+     
+            //////////////////////
+            //TODO make something with the result
+            //////////////////////
+     
+            //Also save result in a file
             fs.writeFile('result.json', JSON.stringify(response.data), function (err) {
                 if (err) throw err;
-                //cOnsole.log('Saved!
                 console.log('Saved!');
             });
-
         })
         .catch(function (error) {
             console.log(error);
         });
 }, 20000) //3600000 milliseconds = 1 hour
-//Listener for new products in wallapop api with the keyword "shure sm57"
 
 console.log('Node server running on port 3000')
